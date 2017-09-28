@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>todo list</title>
+	<style>
+		*{
+			padding:0;
+			margin: 0;
+			font-size: 20px;
+			list-style: none;
+		}
+		#app{
+			width:300px;
+		  	margin: 0 auto;
+		  	padding-top:30px;
+		}
+		.headline
+		{
+			font-family: 'Avenir', Helvetica, Arial, sans-serif;
+			font-size: 50px;
+			color:blue;
+			text-align:center;
+		}
+		input
+		{
+			display: inline-block;
+			width:300px;
+			height:40px;
+		}
+		.err{
+			display: inline-block;
+			float: right;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p class="headline" >My todo list</p>
+		<input type="text" placeholder="What needs to be done?" v-on:keyup.enter="addlist" v-model:value="message">
+		<ul>
+			<li v-for="(item,index) in items">{{item}}<span class="err" v-on:click="items.splice(index, 1)">X</span></li>
+		</ul>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		new Vue({
+			el:'#app',
+			data:{
+				message:'',
+				items:[]
+			},
+			methods:{
+				addlist:function(){
+					this.items.push(this.message)
+					this.message=''
+				}
+			}
+		})
+	</script>
+</body>
+</html>
